@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: traffic
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-CHANGE_ME}   # must match DATABASE_URL
+      POSTGRES_DB: traffic
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+volumes:
+  pgdata:

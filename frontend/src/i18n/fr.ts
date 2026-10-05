@@ -1,0 +1,87 @@
+// French is the source dictionary: ar.ts / en.ts are typed against its keys, so a missing key is a compile error.
+export const fr = {
+  app_name: 'TRAFFIC MAROC', online: 'En ligne', offline: 'Hors connexion', language: 'Langue', loading: 'Chargement…',
+  close: 'Fermer', cancel: 'Annuler', save: 'Enregistrer', saved: 'Enregistré', edit: 'Modifier', delete: 'Supprimer', remove: 'Retirer', submit: 'Envoyer',
+  sending: 'Envoi…', search: 'Rechercher', all: 'Tous', status: 'Statut', actions: 'Actions', location: 'Position', demo: 'DÉMO', read: 'Lu', unread: 'Non lu',
+  enabled: 'activé', disabled: 'désactivé', confirm: 'Je confirme', gone: 'N’existe plus',
+  nav_map: 'Carte', nav_reports: 'Signalements', nav_routes: 'Itinéraires', nav_favorites: 'Favoris', nav_notifications: 'Notifications', nav_profile: 'Profil', nav_cities: 'Villes', nav_admin: 'Administration',
+  offline_banner: 'Vous êtes hors connexion. Les signalements sont enregistrés et envoyés dès le retour du réseau.',
+  queued_banner: '{n} signalement(s) en attente d’envoi.', syncing: 'Synchronisation…', sync_now: 'Synchroniser', sync_done: '{n} signalement(s) synchronisé(s).',
+  // map
+  search_city_road: 'Chercher une ville ou une route', search_place: 'Chercher un lieu', filters: 'Filtres', clear_filters: 'Effacer les filtres', near_me: 'Près de moi', report: 'Signaler', clear_pin: 'Retirer le repère',
+  shown_count: '{n} affiché(s)', kind_reports: 'Signalements de l’application', kind_live: 'Données d’un fournisseur de trafic en direct',
+  traffic_unavailable_short: 'Trafic en direct indisponible',
+  traffic_no_provider: 'Aucun fournisseur de trafic n’est configuré : aucune donnée de trafic en direct n’est affichée. Les icônes sont des signalements de conducteurs, pas du trafic en direct.',
+  traffic_provider_error: 'Le fournisseur de trafic ne répond pas : aucune donnée de trafic en direct n’est affichée.',
+  // report
+  report_title: 'Signaler un problème', report_type: 'Type de problème', report_desc: 'Description (facultatif)', report_pin_set: 'Le signalement sera placé sur le repère de la carte.',
+  report_use_location: 'Votre position actuelle servira à placer le signalement (ou touchez la carte pour placer un repère). Elle n’est utilisée que pour ce signalement.',
+  report_need_location: 'Position introuvable. Touchez la carte pour placer un repère.', report_sent: 'Votre signalement a été envoyé.', report_duplicate: 'Un signalement similaire existe déjà : votre confirmation a été ajoutée.',
+  report_queued: 'Hors connexion : signalement enregistré, il sera envoyé automatiquement.', report_disclaimer: 'Signalement d’un conducteur, non vérifié par un fournisseur de trafic.',
+  vote_thanks: 'Merci pour votre retour.', confirmations: 'Confirmations', reported_at: 'Signalé le', expires_in: 'Expire dans', expired_now: 'Expiré', route_here: 'Itinéraire',
+  photo: 'Photo', photo_camera: 'Prendre une photo', photo_gallery: 'Galerie', photo_bad_type: 'Format non accepté (JPG, PNG ou WebP uniquement).', photo_too_big: 'Photo trop lourde (maximum {mb} Mo).', photo_too_many: 'Maximum {n} photos.',
+  photo_login_note: 'Connectez-vous pour ajouter des photos à vos signalements.', photo_offline_note: 'Les photos ne peuvent pas être ajoutées hors connexion. Vous pourrez en ajouter plus tard depuis « Signalements ».',
+  photo_upload_partial: '{n} photo(s) non envoyée(s). Le signalement, lui, a bien été envoyé.', photo_uploaded: 'Photo ajoutée.', add_photo: 'Ajouter une photo',
+  // statuses / types / levels
+  status_pending: 'En attente', status_confirmed: 'Confirmé', status_rejected: 'Rejeté', status_expired: 'Expiré',
+  type_accident: 'Accident', type_roadworks: 'Travaux', type_closed: 'Route fermée', type_pothole: 'Nid-de-poule', type_flood: 'Inondation', type_traffic_light: 'Feu en panne',
+  type_stopped: 'Véhicule arrêté', type_danger: 'Danger', type_heavy_traffic: 'Circulation dense', type_damaged_road: 'Route dégradée', type_other: 'Autre',
+  level_free: 'Fluide', level_moderate: 'Modéré', level_heavy: 'Dense', level_blocked: 'Bloqué',
+  // my reports
+  no_reports: 'Aucun signalement pour le moment.', rejected_reason: 'Motif du rejet', login_required_reports: 'Connectez-vous pour voir l’historique de vos signalements.',
+  // routes
+  route_from: 'Départ', route_to: 'Arrivée', swap: 'Inverser', pick_on_map: 'Choisir sur la carte', my_location: 'Ma position', pick_hint: 'Touchez la carte pour choisir le point.', no_results: 'Aucun résultat.',
+  as_from: 'départ', as_to: 'arrivée', route_computing: 'Calcul de l’itinéraire…', route_none: 'Aucun itinéraire trouvé.', route_option: 'Option {n}', distance: 'Distance',
+  eta_base: 'Durée estimée (sans trafic)', eta_traffic: 'Durée avec trafic', eta_traffic_ok: 'Durée calculée avec le trafic en direct du fournisseur.',
+  eta_unavailable: 'Durée tenant compte du trafic indisponible : aucun fournisseur de trafic n’est configuré. La durée affichée est une estimation théorique sans trafic.',
+  eta_unavailable_error: 'Durée tenant compte du trafic indisponible : le fournisseur n’a pas répondu. La durée affichée est une estimation théorique sans trafic.',
+  route_reports: 'Signalements sur le trajet', route_no_reports: 'Aucun signalement de conducteur sur ce trajet. Cela ne signifie pas que la route est dégagée.',
+  route_disclaimer: 'Les signalements viennent des utilisateurs de l’application et peuvent être incomplets.', route_to_fav: 'Aller vers', route_from_fav: 'Partir de',
+  // favorites
+  fav_home: 'Domicile', fav_work: 'Travail', fav_add_home: 'Ajouter le domicile', fav_add_work: 'Ajouter le travail', fav_add_custom: 'Ajouter un lieu', fav_new: 'Nouveau favori', fav_edit: 'Modifier le favori',
+  fav_label: 'Nom du lieu', fav_place: 'Chercher le lieu du favori', fav_radius: 'Rayon d’alerte', fav_notify: 'Me notifier des signalements proches', fav_empty: 'Aucun favori. Ajoutez votre domicile ou votre travail.',
+  fav_incomplete: 'Indiquez un nom et choisissez un lieu.', fav_delete_confirm: 'Supprimer « {name} » ?', login_required_favorites: 'Connectez-vous pour enregistrer vos lieux favoris.',
+  // notifications
+  notif_empty: 'Aucune notification.', mark_all_read: 'Tout marquer comme lu', notif_type: 'Type', notif_message: 'Message', notif_new_count: '{n} notification(s) non lue(s)',
+  notif_near_title: 'Signalement près d’un lieu favori', notif_near_body: '« {type} » signalé près de « {place} ».',
+  notif_confirmed_title: 'Signalement confirmé', notif_confirmed_body: 'Votre signalement « {type} » a été confirmé.',
+  notif_rejected_title: 'Signalement rejeté', notif_rejected_body: 'Votre signalement « {type} » a été rejeté.',
+  notif_expired_title: 'Signalement expiré', notif_expired_body: 'Votre signalement « {type} » a expiré.',
+  browser_notifs: 'Notifications du navigateur', browser_notifs_hint: 'Alertes affichées quand l’application est en arrière-plan. Votre navigateur vous demandera l’autorisation.',
+  browser_notifs_on: 'Notifications du navigateur activées.', browser_notifs_off: 'Notifications du navigateur désactivées.', login_required_notifications: 'Connectez-vous pour voir vos notifications.',
+  // profile / auth
+  login: 'Se connecter', register: 'Créer un compte', logout: 'Se déconnecter', email: 'E-mail', password: 'Mot de passe', name: 'Nom', password_hint: '8 caractères minimum.',
+  no_account: 'Pas de compte ? Créer un compte', have_account: 'Déjà un compte ? Se connecter', change_password: 'Changer le mot de passe', current_password: 'Mot de passe actuel', new_password: 'Nouveau mot de passe',
+  anon_note: 'Vous pouvez signaler un problème sans compte. Un compte permet d’ajouter des photos, de suivre vos signalements, d’enregistrer des favoris et de recevoir des notifications.',
+  // cities
+  cities_intro: 'Choisissez une ville. Les signalements de l’application et les données d’un éventuel fournisseur de trafic sont toujours présentés séparément.',
+  reports_explain: 'Signalements faits par les utilisateurs de l’application. Ce n’est pas une mesure du trafic.', active: 'Actifs', last_24h: 'Dernières 24 h', city_no_reports: 'Aucun signalement actif dans cette ville.',
+  live_source: 'Source : {p}.', live_no_data: 'Le fournisseur n’a renvoyé aucune mesure pour cette zone.',
+  ai_title: 'Résumé IA', ai_explain: 'L’IA résume uniquement les signalements et mesures ci-dessus. Elle n’invente aucune situation de trafic.', ai_ask: 'Générer le résumé',
+  ai_no_data: 'Aucune donnée fiable et récente n’est disponible pour cette ville : pas de résumé.', ai_error: 'Le résumé IA est indisponible pour le moment.',
+  // admin
+  admin_tab_dashboard: 'Tableau de bord', admin_tab_reports: 'Signalements à traiter', admin_tab_incidents: 'Incidents', admin_tab_users: 'Utilisateurs', admin_tab_notifications: 'Notifications', admin_tab_providers: 'Fournisseurs', admin_tab_audit: 'Journal d’audit',
+  stat_total: 'Total des signalements', stat_pending: 'En attente', stat_confirmed: 'Confirmés', stat_rejected: 'Rejetés', stat_expired: 'Expirés', stat_today: 'Aujourd’hui', stat_week: '7 derniers jours', stat_users: 'Utilisateurs', stat_unreadNotifications: 'Notifications non lues',
+  approve: 'Approuver', reject: 'Rejeter', expire: 'Expirer', admin_delete_confirm: 'Supprimer définitivement ce signalement et ses photos ?', admin_reject_reason: 'Motif du rejet (facultatif)', admin_none: 'Aucun élément.', admin_total: '{n} au total',
+  role: 'Rôle', last_login: 'Dernière connexion', active_user: 'Actif', disabled_user: 'Désactivé', make_admin: 'Passer admin', make_user: 'Passer utilisateur', disable: 'Désactiver', enable: 'Activer',
+  provider_traffic: 'Fournisseur de trafic', provider_requested: 'Demandé', provider_active: 'Actif', provider_live_on: 'Un fournisseur réel est actif : les données en direct sont affichées séparément des signalements.',
+  provider_reason_ok: 'Actif.', provider_reason_not_configured: 'Aucun fournisseur configuré (TRAFFIC_PROVIDER=none) : aucun trafic en direct n’est affiché.',
+  provider_reason_missing_key: 'Fournisseur demandé mais clé API absente : retour à « none ».', provider_reason_unknown_provider: 'Fournisseur inconnu : retour à « none ».',
+  provider_ai: 'Fournisseur IA', provider_storage: 'Stockage des photos', provider_geo: 'Géocodage / itinéraires',
+  audit_target: 'Cible', audit_details: 'Détails', audit_incident_approve: 'Signalement approuvé', audit_incident_reject: 'Signalement rejeté', audit_incident_expire: 'Signalement expiré', audit_incident_delete: 'Signalement supprimé',
+  audit_incident_status: 'Statut modifié', audit_user_update: 'Utilisateur modifié', audit_admin_bootstrap: 'Administrateur créé',
+  // errors (API codes → messages)
+  err_admin_only: 'Accès réservé aux administrateurs.', err_unauthorized: 'Veuillez vous connecter.', err_invalid_token: 'Session expirée. Veuillez vous reconnecter.', err_invalid_credentials: 'E-mail ou mot de passe incorrect.',
+  err_account_disabled: 'Ce compte est désactivé.', err_forbidden: 'Action non autorisée.', err_not_found: 'Élément introuvable.', err_bad_request: 'Requête invalide.', err_conflict: 'Conflit : l’élément existe déjà.',
+  err_email_taken: 'Cet e-mail est déjà utilisé.', err_login_required: 'Connexion requise.', err_validation_error: 'Données invalides. Vérifiez les champs.', err_outside_morocco: 'Cette position est en dehors du Maroc.',
+  err_incident_closed: 'Ce signalement n’est plus actif.', err_not_owner: 'Ce n’est pas votre élément.', err_too_many_photos: 'Nombre maximum de photos atteint.', err_file_required: 'Aucun fichier envoyé.', err_file_empty: 'Fichier vide.',
+  err_file_too_large: 'Fichier trop volumineux.', err_unsupported_type: 'Format non accepté (JPG, PNG ou WebP).', err_type_mismatch: 'Le contenu du fichier ne correspond pas à son format.',
+  err_too_many_favorites: 'Nombre maximum de favoris atteint.', err_favorite_kind_exists: 'Vous avez déjà un favori de ce type (domicile ou travail).', err_cannot_demote_self: 'Vous ne pouvez pas retirer vos propres droits ou vous désactiver.',
+  err_rate_limited: 'Trop de requêtes. Réessayez dans un instant.', err_payload_too_large: 'Requête trop volumineuse.', err_internal_error: 'Erreur du serveur. Réessayez plus tard.',
+  err_geocoding_unavailable: 'La recherche de lieux est indisponible pour le moment.', err_routing_unavailable: 'Le calcul d’itinéraire est indisponible pour le moment.',
+  err_network_error: 'Pas de connexion au serveur.', err_unknown_error: 'Une erreur est survenue.', err_geolocation: 'Impossible d’obtenir votre position. Vérifiez l’autorisation de localisation.',
+  err_notifications_unsupported: 'Ce navigateur ne gère pas les notifications.', err_notifications_denied: 'Autorisation refusée par le navigateur.',
+  // durations
+  dur_min: '{m} min', dur_hm: '{h} h {m} min', dur_days: '{d} j',
+} as const
+export type TKey = keyof typeof fr

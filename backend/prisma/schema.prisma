@@ -1,0 +1,201 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  PENDING
+  CONFIRMED
+  REJECTED
+  EXPIRED
+}
+
+enum Source {
+  LIVE
+  USER_REPORT
+  OFFICIAL
+  THIRD_PARTY
+  DEMO
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum FavoriteKind {
+  HOME
+  WORK
+  CUSTOM
+}
+
+enum NotificationType {
+  INCIDENT_NEAR_FAVORITE
+  REPORT_CONFIRMED
+  REPORT_REJECTED
+  REPORT_EXPIRED
+  SYSTEM
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  passwordHash  String
+  role          Role           @default(USER)
+  isActive      Boolean        @default(true)
+  // Incremented on logout / password change: invalidates every JWT issued before.
+  tokenVersion  Int            @default(0)
+  locale        String         @default("fr")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now()) @updatedAt
+  lastLoginAt   DateTime?
+  incidents     Incident[]
+  saved         SavedLocation[]
+  notifications Notification[]
+  photos        IncidentPhoto[]
+  auditLogs     AuditLog[]
+}
+
+model City {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  slug      String?    @unique
+  nameAr    String?
+  nameEn    String?
+  lat       Float
+  lng       Float
+  incidents Incident[]
+}
+
+model Incident {
+  id              String                 @id @default(cuid())
+  // Client-generated idempotency key (offline queue): prevents duplicate sync.
+  clientId        String?                @unique
+  type            String
+  latitude        Float
+  longitude       Float
+  description     String                 @default("")
+  status          Status                 @default(PENDING)
+  source          Source                 @default(USER_REPORT)
+  isDemo          Boolean                @default(false)
+  confidence      Int                    @default(1)
+  rejectionReason String?
+  createdAt       DateTime               @default(now())
+  updatedAt       DateTime               @updatedAt
+  expiresAt       DateTime
+  createdBy       User?                  @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  createdById     String?
+  city            City?                  @relation(fields: [cityId], references: [id])
+  cityId          String?
+  deviceHash      String?
+  confirmations   IncidentConfirmation[]
+  photos          IncidentPhoto[]
+
+  @@index([status, expiresAt])
+  @@index([cityId, status])
+  @@index([createdById, createdAt])
+  @@index([type, status, createdAt])
+  @@index([latitude, longitude])
+  @@index([createdAt])
+}
+
+model IncidentConfirmation {
+  id         String   @id @default(cuid())
+  incident   Incident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+  incidentId String
+  // Voter key: "u:<userId>" for signed-in users, otherwise a device hash.
+  deviceHash String
+  stillThere Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  @@unique([incidentId, deviceHash])
+}
+
+model IncidentPhoto {
+  id          String   @id @default(cuid())
+  incident    Incident @relation(fields: [incidentId], references: [id], onDelete: Cascade)
+  incidentId  String
+  storageKey  String
+  mimeType    String   @default("image/jpeg")
+  sizeBytes   Int      @default(0)
+  uploadedBy  User?    @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+  uploadedById String?
+  createdAt   DateTime @default(now())
+
+  @@index([incidentId])
+}
+
+model SavedLocation {
+  id        String       @id @default(cuid())
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  label     String
+  kind      FavoriteKind @default(CUSTOM)
+  lat       Float
+  lng       Float
+  // Incidents closer than this (meters) to the favorite trigger a notification.
+  radiusM   Int          @default(1000)
+  notify    Boolean      @default(true)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @default(now()) @updatedAt
+
+  @@index([userId])
+  @@index([lat, lng])
+}
+
+model Notification {
+  id         String           @id @default(cuid())
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  type       NotificationType @default(SYSTEM)
+  // Legacy plain-text fields kept for backward compatibility. The UI renders
+  // translated text from `type` + `data`; these are only a fallback.
+  title      String
+  body       String
+  incidentId String?
+  data       Json?
+  readAt     DateTime?
+  createdAt  DateTime         @default(now())
+
+  @@index([userId, readAt, createdAt])
+  @@index([incidentId])
+}
+
+model TrafficProvider {
+  id      String  @id @default(cuid())
+  name    String  @unique
+  enabled Boolean @default(false)
+}
+
+model TrafficSnapshot {
+  id       String   @id @default(cuid())
+  provider String
+  level    String
+  lat      Float
+  lng      Float
+  at       DateTime @default(now())
+
+  @@index([provider, at])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  // Legacy free-text actor kept; actorId is the structured reference.
+  actor     String?
+  actorUser User?    @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actorId   String?
+  entity    String?
+  entityId  String?
+  meta      Json?
+  at        DateTime @default(now())
+
+  @@index([at])
+  @@index([actorId, at])
+  @@index([entity, entityId])
+}
